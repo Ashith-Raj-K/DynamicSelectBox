@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>select box</title>
+</head>
+<body>
+ <label for="vehicle">Select Vehicle:</label>   
+<select name="vehicle" id="vehicle" onchange="chooseVehicle()">
+    <option value="">Choose one</option>
+    <option value="car">Car</option>
+    <option value="truck">Truck</option>
+    <option value="plane">Plane</option>
+    <option value="train">Train</option>
+</select>
+
+<label for="model">Select Model:</label>
+<select name="model" id="model">
+    <option value="">Available</option> 
+    <!-- set a default value -->
+</select>
+
+<script>
+    //create model objects foreach vehicles 
+    const vehicleModels = {
+        car : ["Benz", "Audi", "Tesla", "Ferai"],
+        truck : ["Asok Leyland", "Tata", "Volvo", "Mahindra"],
+        plane : ["Air India", "Oman Airways", "Britsh Ailines", "indigo"],
+        train : ["ParasuRam","Maveli","Vande Bharath","Kannur Exp"]
+    };
+    function chooseVehicle(){
+        // 1.accesing vehile, 2.accessing model 3.access the type which is choosed , 4.clearing the model kf it was selected
+        const vehicleType = document.getElementById("vehicle");
+        const modelType = document.getElementById("model");
+        const selectdVehicle = vehicleType.value;
+        modelType.innerHTML = '<option value="">Available models</option>';
+
+        if (selectdVehicle && vehicleModels[selectdVehicle]){  //1.passing selected item or vehicle && passsing the object with perticular selected item, ie whole array of one item
+            vehicleModels[selectdVehicle].forEach(model => {   // iterating through each item here item=model, eg: car, 
+               const option = document.createElement("option")  //create a option tag from documen object model
+               option.value = model                             //set the value of option as model name
+               option.text = model                              // set the inner text <option>{one element from array}</option>
+               modelType.appendChild(option)                    // appending the created child inside <option>. countinues until last element of the array occured 
+            });
+        }
+    }
+</script>
+</body>
+</html>
